@@ -311,6 +311,7 @@ h2{
   display: flex;
   flex-direction: column;
   gap: 60px;
+  align-items: flex-start;
 }
 
 .gallery-images img{
@@ -319,7 +320,7 @@ h2{
 }
 
 .gallery-images img:nth-child(even){
-  transform: translateX(400px);
+  align-self: flex-end;
 }
 
 /* accessエリア */
@@ -471,7 +472,7 @@ hr{
 /* フェードイン */
 .fade-in{
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(80px);
   transition: opacity 2.0s ease, transform 2.0s ease;
   z-index: 10;
 }
