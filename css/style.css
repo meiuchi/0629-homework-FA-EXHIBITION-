@@ -550,10 +550,6 @@ hr{
   .gallery-images img{
   width: 100%;
   height: auto;
-}
-
-  .gallery-images img:nth-child(even){
-    transform: translateX(0);
   }
 
   .space{
