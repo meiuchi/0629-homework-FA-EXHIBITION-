@@ -63,27 +63,25 @@ h2{
 
 /* メイン写真３枚 */
 .animation-wrap{
-  height: 150vh;
+  height: 100vh;
+  width: 100%;
   position: relative;
 }
 
 .sticky-container{
   position: sticky;
   top: 0;
+  width: 100%;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content:center;
   overflow: hidden;
 }
 
 .mainvisual{
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   transform-origin: center center;
-  transform: scale(1);
-  transition: transform 0.1s ease-out;
+  will-change: transform;
 }
 
 .photo{
@@ -92,7 +90,6 @@ h2{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
 }
 
 .left {
@@ -495,10 +492,6 @@ hr{
   #access-area{
     scroll-margin-top: -280px;
   }
-  
-  .right, .left {
-    display: none;
-  }
 
   h1{
     font-size: 48px;
@@ -509,6 +502,32 @@ hr{
   h2{
     font-size: 32px;
   }
+
+  /* メインお花写真 */
+  .mainvisual{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    transition: transform 0.01s ease-out;
+  }
+
+  .center{
+    left: 0;
+  }
+
+  .left{
+    left: -100%;
+  }
+
+  .right{
+    right: -100%;
+  }
+
+  .right, .left {
+    display: none;
+  }
+
 
   /* サイドボタン */
   .side-btn{
@@ -573,7 +592,7 @@ hr{
 
   /* フッター */
   #footer{
-    width: 80%;
+    width: 90%;
     margin: 60px auto;
   }
 

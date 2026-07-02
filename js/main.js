@@ -33,24 +33,26 @@ window.addEventListener('scroll', () => {
   const PhotoContainer = document.querySelector('.mainvisual');
 
   if (wrapper && PhotoContainer) {
-    const rectWrapper = wrapper.getBoundingClientRect();
-    let progress = 0;
-
-    if (rectWrapper.top > 0) {
-      PhotoContainer.style.transform = "scale(1)";
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    
+    // アニメーションを効かせたい全体の長さ（外枠の高さ分）
+    const wrapperHeight = wrapper.offsetHeight;
+    
+    // トップにいる時は確実に0、スクロールするほど1に近づく計算
+    let progress = scrollTop / wrapperHeight;
+      
+    if (progress < 0) progress = 0;
+    if (progress > 1) progress = 1;
+    
+    let scaleValue;
+    if(window.innerWidth <= 768){
+      scaleValue = 1 - progress * 0.7;
     } else {
-      const maxScroll = wrapper.offsetHeight - window.innerHeight;
-      if (maxScroll > 0) {
-        progress = -rectWrapper.top / maxScroll;
-      }
-      
-      if (progress < 0) progress = 0;
-      if (progress > 1) progress = 1;
-      
-      const scaleValue = 1 + progress * 1.5;
-      PhotoContainer.style.transform = `scale(${scaleValue})`;
+      scaleValue = 1 + progress * 1.5;
     }
+    PhotoContainer.style.transform = `scale(${scaleValue})`;
   }
+  
 
   // --- B. ロゴ・ハンバーガー・サイドボタン表示 ---
   const headerLogo = document.querySelector('.logo img');
@@ -95,7 +97,7 @@ window.addEventListener('scroll', () => {
     
     if (rectAccess.top < triggerStart) {
 
-      // 💡 アクセスエリアに入ったら、サイドボタンを引っ込める
+      // アクセスエリアに入ったら、サイドボタンを引っ込める
       if (exhibitorBtn) exhibitorBtn.classList.remove('is-visible');
       if (visitorBtn) visitorBtn.classList.remove('is-visible');
 
@@ -108,16 +110,16 @@ window.addEventListener('scroll', () => {
     } 
     
   } else {
-    body.classList.remove('active');
+      body.classList.remove('active');
 
-      // 💡 アクセスエリア外で、かつメインビジュアルを過ぎていれば再表示
+      // アクセスエリア外で、かつメインビジュアルを過ぎていれば再表示
       if (animationWrap && scrollPosition >= animationWrap.offsetHeight) {
         if (exhibitorBtn) exhibitorBtn.classList.add('is-visible');
         if (visitorBtn) visitorBtn.classList.add('is-visible');
       }
     }
   }
-}); 
+});
   
 
 
